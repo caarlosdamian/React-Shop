@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grid } from "@material-ui/core";
+import "./App.css";
+import Content from "./components/Content/Content";
+import Header from "./components/Header/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./components/Home/Home";
+import GetData from "./api/getData";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    GetData().then((res) => {
+      setdata(res);
+    });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Grid container direction="column">
+        <Grid item>
+          <Header />
+        </Grid>
+        <Grid item container>
+          <Grid item xs={false} sm={2} />
+          <Grid item sm={8} xs={12}>
+            <Switch>
+              <Route path="/" exact>
+                <Home data={data} />
+              </Route>
+              <Route path="/store/:id" exact>
+                <Content data={data} />
+              </Route>
+              <Route path="/" data={data} exact component={Home} />
+            </Switch>
+          </Grid>
+          <Grid item xs={false} sm={2} />{" "}
+        </Grid>
+      </Grid>
+    </Router>
   );
 }
 
