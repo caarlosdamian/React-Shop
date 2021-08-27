@@ -11,31 +11,32 @@ import { Avatar, CardMedia } from "@material-ui/core";
 const CardItem = ({ item }) => {
   const classes = useStyles();
 
-
   return (
     <>
       <Card className={classes.root} variant="outlined">
         <CardHeader
           avatar={
             <Avatar aria-label="recipe" className={classes.avatar}>
-              {item.title}
+              {item?.title[0]}
             </Avatar>
           }
-          title={item.name}
+          title={item?.name}
         />
         <CardContent>
           <CardMedia
             className={classes.media}
-            image={item.imageUrl}
+            image={item?.imageUrl}
             title="item-img"
           />
 
           <Typography variant="h5" component="h2">
-            ${item.price}
+            ${item?.price}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" style={{color:"#F59F9F"}}>Add to Car</Button>
+          <Button size="small" style={{ color: "#F59F9F" }}>
+            Add to Car
+          </Button>
         </CardActions>
       </Card>
     </>
