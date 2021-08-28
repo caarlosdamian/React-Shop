@@ -19,7 +19,7 @@ const HomeCard = ({ item }) => {
             image={item.imageUrl}
             title="item-img"
           />
-          <Typography variant="h5" component="h2">
+          <Typography  className={classes.typo} variant="h5" component="h2">
             {item.title}
           </Typography>
         </CardContent>
