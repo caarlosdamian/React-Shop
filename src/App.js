@@ -1,20 +1,12 @@
 import { Grid } from "@material-ui/core";
 import "./App.css";
-import Content from "./components/Content/Content";
+// import Content from "./components/Content/Content";
 import Header from "./components/Header/Header";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/Home/Home";
-import GetData from "./api/getData";
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router /*, Route, Switch*/ } from "react-router-dom";
+// import Home from "./components/Home/Home";
 import Provider from "./redux/Provider";
 
 function App() {
-  const [data, setdata] = useState([]);
-  useEffect(() => {
-    GetData().then((res) => {
-      setdata(res);
-    });
-  }, []);
 
   return (
     <Provider>
@@ -23,7 +15,7 @@ function App() {
           <Grid item>
             <Header />
           </Grid>
-          <Grid item container>
+          {/* <Grid item container>
             <Grid item xs={false} sm={2} />
             <Grid item sm={8} xs={12}>
               <Switch>
@@ -37,7 +29,7 @@ function App() {
               </Switch>
             </Grid>
             <Grid item xs={false} sm={2} />{" "}
-          </Grid>
+          </Grid> */}
         </Grid>
       </Router>
     </Provider>
