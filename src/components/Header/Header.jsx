@@ -4,24 +4,21 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
-import useStyles from "./header.css";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getCollections } from "../../redux/selectors";
-import { fetchCollections } from "../../redux/actions/getCollections";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { fetchCollections } from "../../redux/actions/getCollections";
+import useStyles from "./header.css";
 
 export default function Header() {
-  const state = useSelector(getCollections)
+  const dispatch = useDispatch()
   const classes = useStyles();
 
   const menuId = "primary-search-account-menu";
   useEffect(() => {
-    fetchCollections().next()
-    fetchCollections().next()
-  }, [])
-
-  console.log(state)
+    dispatch(fetchCollections())
+  }, [dispatch])
   return (
     <div className={classes.grow}>
       <AppBar

@@ -1,12 +1,15 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
-import CardItem from "../Card/CardItem";
-import { createBrowserHistory } from "history";
+import { useSelector } from "react-redux";
 
-const Content = ({ data }) => {
+import CardItem from "../Card";
+import { createBrowserHistory } from "history";
+import { getCollections } from "../../redux/selectors";
+
+const Content = () => {
+  const { products } = useSelector(getCollections)
   const historia = createBrowserHistory();
   const path = historia.location.pathname.slice(7);
-  const datafilter = [...data?.filter((item) => item.title === path)];
+  const datafilter = [...products?.filter(({ title }) => title === path)];
 
   return (
     <>
