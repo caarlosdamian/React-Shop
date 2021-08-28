@@ -1,8 +1,7 @@
 import { SET_COLLECTIONS_FROM_API } from "../constants";
 
 const initState = {
-    redux: 'holi', // eliminar
-    productos: {}
+    products: []
 }
 
 const collectionReducer = (state = initState, action) => {
@@ -10,7 +9,7 @@ const collectionReducer = (state = initState, action) => {
         case SET_COLLECTIONS_FROM_API:
             return {
                 ...state,
-                productos: action.payload
+                products: action.payload
             }
         default:
             return state

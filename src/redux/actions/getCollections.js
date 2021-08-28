@@ -1,13 +1,12 @@
-import { put } from 'redux-saga/effects'
-
 import { BASE_URL, SET_COLLECTIONS_FROM_API } from "../constants";
 
 
-export function* fetchCollections() {
+export const fetchCollections = () => async (dispatch) => {
     try {
-        const data = yield fetch(`${BASE_URL}store/collections/`)
-        yield put({ type: SET_COLLECTIONS_FROM_API, payload: data.json() })
+        const data = await fetch(`${BASE_URL}store/collections/`)
+        const collections = await data.json()
+        dispatch({ type: SET_COLLECTIONS_FROM_API, payload: collections.data })
     } catch (error) {
-        yield console.error(error)
+        console.error(error);
     }
 }

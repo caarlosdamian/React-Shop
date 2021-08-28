@@ -1,9 +1,9 @@
 import { Grid } from "@material-ui/core";
 import "./App.css";
-// import Content from "./components/Content/Content";
-import Header from "./components/Header/Header";
-import { BrowserRouter as Router /*, Route, Switch*/ } from "react-router-dom";
-// import Home from "./components/Home/Home";
+import Content from "./components/Content";
+import Header from "./components/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
 import Provider from "./redux/Provider";
 
 function App() {
@@ -15,21 +15,16 @@ function App() {
           <Grid item>
             <Header />
           </Grid>
-          {/* <Grid item container>
+          <Grid item container>
             <Grid item xs={false} sm={2} />
             <Grid item sm={8} xs={12}>
               <Switch>
-                <Route path="/" exact>
-                  <Home data={data} />
-                </Route>
-                <Route path="/store/:id" exact>
-                  <Content data={data} />
-                </Route>
-                <Route path="/" data={data} exact component={Home} />
+                <Route path="/" exact component={Home} />
+                <Route path="/store/:id" exact component={Content} />
               </Switch>
             </Grid>
             <Grid item xs={false} sm={2} />{" "}
-          </Grid> */}
+          </Grid>
         </Grid>
       </Router>
     </Provider>
