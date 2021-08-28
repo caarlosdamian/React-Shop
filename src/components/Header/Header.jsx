@@ -51,7 +51,7 @@ export default function Header() {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                SING UP
+                <Link to="/"  className={classes.Link}>SING OUT</Link>
               </Typography>
             </IconButton>
             <IconButton

@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Provider from "./redux/Provider";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Resiter";
 
 function App() {
 
@@ -19,7 +21,9 @@ function App() {
             <Grid item xs={false} sm={2} />
             <Grid item sm={8} xs={12}>
               <Switch>
-                <Route path="/" exact component={Home} />
+                <Route path="/" exact component={Login}/>
+                <Route path="/register" exact component={Register}/>
+                <Route path="/home" exact component={Home} />
                 <Route path="/store/:id" exact component={Content} />
               </Switch>
             </Grid>
