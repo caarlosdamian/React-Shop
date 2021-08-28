@@ -1,10 +1,13 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
-import HomeCard from "../HomeCard/HomeCard";
+import { useSelector } from "react-redux";
 
-const Home = ({ data }) => {
+import HomeCard from "../HomeCard";
+import { getCollections } from '../../redux/selectors/index';
+
+const Home = () => {
+  const { products } = useSelector(getCollections)
   const datafilter = [
-    ...data.reduce((map, obj) => map.set(obj.col_id, obj), new Map()).values(),
+    ...products?.reduce((map, obj) => map.set(obj.col_id, obj), new Map()).values(),
   ];
   return (
     <Grid container spacing={4}>
