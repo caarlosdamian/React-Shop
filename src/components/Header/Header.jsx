@@ -51,7 +51,7 @@ export default function Header() {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                <Link to="/"  className={classes.Link}>SING OUT</Link>
+                <Link to="/login"  className={classes.Link}>LOGIN</Link>
               </Typography>
             </IconButton>
             <IconButton
