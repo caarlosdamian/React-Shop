@@ -36,14 +36,16 @@ export const useStyles = makeStyles(() => ({
       marginBottom:"20px"
   },
   Link:{
-      textDecoration:"none"
+      textDecoration:"none",
+      '&:hover': {
+        textDecoration:"underline"
+     },
   },
   span:{
     fontSize:"16px",
     textDecoration:"none",
-    '&:hover': {
-        textDecoration:"underline"
-     },
+    marginRight:"5px",
+   
   }
 }));
 

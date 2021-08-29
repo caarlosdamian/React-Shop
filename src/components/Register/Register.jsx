@@ -70,6 +70,10 @@ const Register = () => {
             </form>
           </div>
         </div>
+          <span className={classes.span}>Already member?</span>
+        <Link  className={classes.Link}to="/login">
+        <span className={classes.span}>Login</span>
+        </Link>
       </div>
     </div>
   );

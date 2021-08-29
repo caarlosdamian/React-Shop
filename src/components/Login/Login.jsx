@@ -1,10 +1,9 @@
 import React from "react";
 import "./login.css.js";
 import { Link } from "react-router-dom";
-import { Button,TextField } from "@material-ui/core";
-import {useStyles} from "./login.css"
+import { Button, TextField } from "@material-ui/core";
+import { useStyles } from "./login.css";
 const Login = () => {
- 
   const classes = useStyles();
 
   return (
@@ -31,7 +30,7 @@ const Login = () => {
                 />
               </div>
               <div className="form-links">
-                <Link  className={classes.Link}to="/">
+                <Link className={classes.Link} to="/">
                   <Button
                     variant="contained"
                     color="primary"
@@ -44,8 +43,9 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <Link  className={classes.Link}to="/register">
-          <span className={classes.span}>Not Register yet?</span>
+        <span className={classes.span}>Not Register yet?</span>
+        <Link className={classes.Link} to="/register">
+          <span className={classes.span}>Register</span>
         </Link>
       </div>
     </div>

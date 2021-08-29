@@ -27,6 +27,9 @@ export const useStyles = makeStyles(() => ({
   },
   Link: {
     textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
   btn: {
     backgroundColor: "#6BA8F6",
@@ -35,5 +38,10 @@ export const useStyles = makeStyles(() => ({
     "&:hover": {
       background: "#4086DF",
     },
+  },
+  span: {
+    fontSize: "16px",
+    textDecoration: "none",
+    marginRight: "5px",
   },
 }));
