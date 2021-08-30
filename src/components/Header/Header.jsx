@@ -5,13 +5,17 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchCollections } from "../../redux/actions/getCollections";
+import { getCartProducts } from "../../redux/selectors";
+import { getTotalQuantityCart } from "../../utils/totals";
+
 import useStyles from "./header.css";
 
 export default function Header() {
+  const cartProducts = useSelector(getCartProducts)
   const dispatch = useDispatch()
   const classes = useStyles();
 
@@ -19,6 +23,9 @@ export default function Header() {
   useEffect(() => {
     dispatch(fetchCollections())
   }, [dispatch])
+
+  const totalQuantityCart = getTotalQuantityCart(cartProducts)
+
   return (
     <div className={classes.grow}>
       <AppBar
@@ -62,6 +69,7 @@ export default function Header() {
               color="inherit"
             >
               <ShoppingCartIcon />
+              <span>{totalQuantityCart > 0 ? totalQuantityCart : ''}</span>
             </IconButton>
           </div>
         </Toolbar>
