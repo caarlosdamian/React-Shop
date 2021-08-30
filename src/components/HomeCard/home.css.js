@@ -14,16 +14,18 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   typo: {
+    color: 'white',
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     padding: "10px",
-    backgroundColor: "rgba(143 , 143, 143, 0.5)",
+    backgroundColor: "rgba(0 , 0, 0, 0.5)",
     borderRadius: "10px",
     transition: "all 0.5s ease-out",
     "&:hover": {
-      backgroundColor: "rgba(162, 162, 162, .8)",
+      backgroundColor: "rgba(255, 255, 255, .8)",
+      color: "black"
     },
   },
 });
