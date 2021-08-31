@@ -23,5 +23,20 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "black",
   },
+  icon: {
+    fontSize: "35px",
+  },
+  span: {
+    fontSize: "12px",
+    position: "absolute",
+    color: "white",
+    bottom: "15px",
+    backgroundColor: "red",
+    padding: "1px",
+    height: "12px",
+    width: "12px",
+    borderRadius: "50%",
+  },
+
 }));
 export default useStyles;

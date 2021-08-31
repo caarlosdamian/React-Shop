@@ -1,4 +1,4 @@
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import LocalMallIcon from "@material-ui/icons/LocalMall";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,24 +7,23 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import { fetchCollections } from "../../redux/actions/getCollections";
 import { getCartProducts } from "../../redux/selectors";
 import { getTotalQuantityCart } from "../../utils/totals";
-
 import useStyles from "./header.css";
+import Sidebar from "../Sidebar/Sidebar";
 
-export default function Header() {
-  const cartProducts = useSelector(getCartProducts)
-  const dispatch = useDispatch()
+export default function Header({ setisToggle, isToggle }) {
+  const cartProducts = useSelector(getCartProducts);
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const menuId = "primary-search-account-menu";
   useEffect(() => {
-    dispatch(fetchCollections())
-  }, [dispatch])
+    dispatch(fetchCollections());
+  }, [dispatch]);
 
-  const totalQuantityCart = getTotalQuantityCart(cartProducts)
+  const totalQuantityCart = getTotalQuantityCart(cartProducts);
 
   return (
     <div className={classes.grow}>
@@ -35,20 +34,21 @@ export default function Header() {
         <Toolbar>
           <IconButton
             edge="start"
+            fontSize="large"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
           </IconButton>
-          <Link to="/"  className={classes.Link}>
-          <Typography className={classes.title} variant="h5" noWrap>
-            Fake Store
-          </Typography>
+          <Link to="/" className={classes.Link}>
+            <Typography className={classes.title} variant="h5" noWrap>
+              Fake Store
+            </Typography>
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link to="/store"  className={classes.Link}>
+            <Link to="/store" className={classes.Link}>
               <IconButton color="inherit">
                 <Typography className={classes.title} variant="h6" noWrap>
                   STORE
@@ -58,22 +58,31 @@ export default function Header() {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                <Link to="/login"  className={classes.Link}>LOGIN</Link>
+                <Link to="/login" className={classes.Link}>
+                  LOGIN
+                </Link>
               </Typography>
             </IconButton>
             <IconButton
+              onClick={() => setisToggle(true)}
               edge="end"
               aria-label="show 4 new items"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
             >
-              <ShoppingCartIcon />
-              <span>{totalQuantityCart > 0 ? totalQuantityCart : ''}</span>
+              <LocalMallIcon className={classes.icon} />
+              {totalQuantityCart > 0 && (
+                <span className={classes.span}>
+                  {totalQuantityCart > 0 ? totalQuantityCart : ""}
+                </span>
+              )}
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
+
+      <Sidebar cartProducts={cartProducts} isToggle={isToggle} />
     </div>
   );
 }
