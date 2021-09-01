@@ -18,6 +18,7 @@ const Content = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          marginTop: "100px",
         }}
       >
         {datafilter[0]?.title}
