@@ -30,7 +30,7 @@ export default function Header({ setisToggle, isToggle }) {
   return (
     <div className={classes.grow}>
       <AppBar
-        position="static"
+        position="fixed"
         style={{ backgroundColor: "#F5F3F8", color: "black" }}
       >
         <Toolbar>
