@@ -8,6 +8,7 @@ import Provider from "./redux/Provider";
 import Login from "./components/Login";
 import Register from "./components/Register/Register";
 import { useState } from "react";
+import Store from "./components/Store/";
 
 function App() {
   const [isToggle, setisToggle] = useState(false);
@@ -19,10 +20,11 @@ function App() {
           <Grid item>
             <Header isToggle={isToggle} setisToggle={setisToggle} />
           </Grid>
-          <Grid item container onClick={()=>setisToggle(false)}>
+          <Grid item container onClick={() => setisToggle(false)}>
             <Grid item xs={false} sm={2} />
-            <Grid item sm={8} xs={12}>
+            <Grid item sm={8} xs={12} lg={8}>
               <Switch>
+              <Route path="/store" exact component={Store} />
                 <Route path="/" exact component={Home} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/login" exact component={Login} />
