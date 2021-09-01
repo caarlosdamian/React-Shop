@@ -7,6 +7,8 @@ import Home from "./components/Home";
 import Provider from "./redux/Provider";
 import Login from "./components/Login";
 import Register from "./components/Register/Register";
+import Checkout from "./components/Checkout/Checkout";
+import ModalForm from './components/Modal/ModalForm';
 import { useState } from "react";
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
             <Grid item sm={8} xs={12}>
               <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/modal" exact component={ModalForm}/>
+                <Route path="/checkout" exact component={Checkout}/>
                 <Route path="/register" exact component={Register} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/store/:id" exact component={Content} />

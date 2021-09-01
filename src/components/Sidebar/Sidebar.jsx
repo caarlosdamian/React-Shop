@@ -10,6 +10,7 @@ import {
   updateItemQuantity,
   cleanCart,
 } from "../../redux/actions/cartActions";
+import { Link } from "react-router-dom";
 const Sidebar = ({ isToggle, cartProducts }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -69,7 +70,7 @@ const Sidebar = ({ isToggle, cartProducts }) => {
         </div>
       ))}
       <Button size="small" variant="contained" color="primary">
-        checkout
+        <Link to="/checkout">checkout</Link>
       </Button>
       <Button
         onClick={() => dispatch(cleanCart())}
