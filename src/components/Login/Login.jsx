@@ -3,8 +3,24 @@ import "./login.css.js";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { useStyles } from "./login.css";
+import { useForm } from '../../hooks/useForm';
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/userActions.js";
+
+const initValues = {
+  email: '',
+  password: '',
+}
+
 const Login = () => {
+  const [formData, handleChange] = useForm(initValues)
+  const dispatch = useDispatch()
   const classes = useStyles();
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    dispatch(login(formData))
+  }
 
   return (
     <div className={classes.row}>
@@ -12,33 +28,35 @@ const Login = () => {
         <div className="card">
           <div className="card-body">
             <h2 className={classes.loginText}>Login</h2>
-            <form>
+            <form onSubmit={onSubmit}>
               <div className={classes.formGgroup}>
                 <TextField
-                  id="standard-basic"
-                  label="Username"
-                  placeholder="Username"
-                  name="Username"
+                  label="Email"
+                  placeholder="Email"
+                  name="email"
+                  autoComplete="off"
+                  onChange={handleChange}
                 />
               </div>
               <div className={classes.formGgroup}>
                 <TextField
-                  id="standard-basic"
                   label="Password"
                   placeholder="Password"
                   name="password"
+                  type="password"
+                  autoComplete="off"
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-links">
-                <Link className={classes.Link} to="/">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.btn}
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                  type="submit"
+                >
+                  Login
+                </Button>
               </div>
             </form>
           </div>

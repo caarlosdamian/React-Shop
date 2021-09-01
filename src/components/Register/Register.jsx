@@ -1,34 +1,53 @@
 import { Button, TextField } from "@material-ui/core";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { register } from "../../redux/actions/userActions";
 import { useStyles } from "./register.css";
 
+const initValues = {
+  displayName: '',
+  email: '',
+  password: '',
+}
+
 const Register = () => {
+  const [formData, handleChange] = useForm(initValues)
+  const dispatch = useDispatch()
+
   const classes = useStyles();
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    dispatch(register(formData))
+  }
   return (
     <div className={classes.registerForm}>
       <div className={classes.col}>
         <div className="card">
           <div className="card-body">
             <h2 className={classes.registerText}>REGISTER</h2>
-            <form>
+            <form onSubmit={onSubmit}>
               <div className={classes.formGgroup}>
                 <TextField
                   type="text"
                   className="form-control"
                   placeholder="Name"
-                  name="name"
+                  name="displayName"
+                  onChange={handleChange}
                 />
               </div>
 
-              <div className={classes.formGgroup}>
+              {/* <div className={classes.formGgroup}>
                 <TextField
                   type="text"
                   className="form-control"
                   placeholder="Lastname"
                   name="lastname"
+                  onChange={handleChange}
                 />
-              </div>
+              </div> */}
 
               <div className={classes.formGgroup}>
                 <TextField
@@ -36,6 +55,7 @@ const Register = () => {
                   className="form-control"
                   placeholder="Email"
                   name="email"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -45,27 +65,29 @@ const Register = () => {
                   className="form-control"
                   placeholder="Password"
                   name="password"
+                  onChange={handleChange}
                 />
               </div>
 
-              <div className={classes.formGgroup}>
+              {/* <div className={classes.formGgroup}>
                 <TextField
                   type="password"
                   className="form-control"
                   placeholder="Confirm Password"
                   name="confirmation"
                 />
-              </div>
+              </div> */}
               <div id="register">
-              <Link  className={classes.Link}to="/">
+                {/* <Link  className={classes.Link}to="/"> */}
                   <Button
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className={classes.btn}
                   >
                     Register
                   </Button>
-                </Link>
+                {/* </Link> */}
               </div>
             </form>
           </div>
