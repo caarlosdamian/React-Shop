@@ -8,13 +8,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCollections } from "../../redux/actions/getCollections";
-import { getCartProducts } from "../../redux/selectors";
+import { getAuth, getCartProducts } from "../../redux/selectors";
 import { getTotalQuantityCart } from "../../utils/totals";
 import useStyles from "./header.css";
 import Sidebar from "../Sidebar/Sidebar";
+import { logout } from "../../redux/actions/userActions";
 
 export default function Header({ setisToggle, isToggle }) {
-  const cartProducts = useSelector(getCartProducts);
+  const cartProducts = useSelector(getCartProducts)
+  const { loggedIn } = useSelector(getAuth)
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -58,9 +60,13 @@ export default function Header({ setisToggle, isToggle }) {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                <Link to="/login" className={classes.Link}>
-                  LOGIN
-                </Link>
+                {loggedIn ?
+                <span onClick={() => dispatch(logout())} className={classes.Link}>
+                  LOGOUT
+                </span>
+                : <Link to="/login" className={classes.Link}>
+                    LOGIN
+                  </Link>}
               </Typography>
             </IconButton>
             <IconButton
