@@ -7,6 +7,20 @@ export const useStyles = makeStyles(() => ({
   table: {
     minWidth: 650,
   },
+  icon: {
+    cursor: "pointer",
+    borderRadius: "10px",
+    transition: "transform .2s",
+    fontSize:"15px",
+    "&:hover": {
+      transform: "scale(1.5)",
+    },
+  },
+  span: {
+    fontSize: "15px",
+    marginLeft: "20px",
+    marginRight: "20px",
+  },
   media: {
     height: "6rem",
     weight: "20rem",

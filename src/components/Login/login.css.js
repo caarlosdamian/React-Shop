@@ -13,7 +13,7 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
-    marginTop: "60px",
+    marginTop: "100px",
     height: "40em",
   },
   col: {

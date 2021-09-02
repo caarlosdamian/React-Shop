@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(() => ({
   Sidebar: {
-    zIndex: 1000,
+    zIndex: 200000,
     width: "250px",
     background: "white",
     top: "0",
@@ -15,6 +15,8 @@ const useStyles = makeStyles(() => ({
     transition: "all ease-in 0.5s",
   },
   header: {
+    display: "flex",
+    justifyContent:"space-between",
     fontWeight: "300",
     fontSize: "24px",
     textTransform: "uppercase",
@@ -29,6 +31,9 @@ const useStyles = makeStyles(() => ({
       width: "100%",
       background: " #000000",
     },
+  },
+  icon:{
+    cursor: "pointer",
   },
 
   shrink: {
@@ -80,5 +85,26 @@ const useStyles = makeStyles(() => ({
     fontSize: "14px",
     fontWeight: "500",
   },
+  button:{
+    marginRight:"3px",
+    textDecoration:"none",
+    height: "28px",
+  },
+  buttonRed:{
+    marginRight:"3px",
+    textDecoration:"none",
+    height: "28px",
+    backgroundColor:"#C70039",
+    color:"white",
+    '&:hover': {
+      backgroundColor: 'gray',
+      color: '#3c52b2',
+  },
+
+  },
+  link:{
+    textDecoration:"none",
+    color:"white"
+  }
 }));
 export default useStyles;

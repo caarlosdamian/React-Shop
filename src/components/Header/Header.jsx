@@ -15,8 +15,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import { logout } from "../../redux/actions/userActions";
 
 export default function Header({ setisToggle, isToggle }) {
-  const cartProducts = useSelector(getCartProducts)
-  const { loggedIn } = useSelector(getAuth)
+  const cartProducts = useSelector(getCartProducts);
+  const { loggedIn } = useSelector(getAuth);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -60,13 +60,18 @@ export default function Header({ setisToggle, isToggle }) {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                {loggedIn ?
-                <span onClick={() => dispatch(logout())} className={classes.Link}>
-                  LOGOUT
-                </span>
-                : <Link to="/login" className={classes.Link}>
+                {loggedIn ? (
+                  <span
+                    onClick={() => dispatch(logout())}
+                    className={classes.Link}
+                  >
+                    LOGOUT
+                  </span>
+                ) : (
+                  <Link to="/login" className={classes.Link}>
                     LOGIN
-                  </Link>}
+                  </Link>
+                )}
               </Typography>
             </IconButton>
             <IconButton
@@ -88,7 +93,11 @@ export default function Header({ setisToggle, isToggle }) {
         </Toolbar>
       </AppBar>
 
-      <Sidebar cartProducts={cartProducts} isToggle={isToggle} />
+      <Sidebar
+        cartProducts={cartProducts}
+        setisToggle={setisToggle}
+        isToggle={isToggle}
+      />
     </div>
   );
 }
