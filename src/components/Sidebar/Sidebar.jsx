@@ -11,21 +11,29 @@ import {
   cleanCart,
 } from "../../redux/actions/cartActions";
 import { Link } from "react-router-dom";
-const Sidebar = ({ isToggle, cartProducts }) => {
+const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   return (
     <div className={isToggle ? classes.Sidebar : classes.shrink}>
-      {cartProducts > 0 ? (
+      {cartProducts.length === 0 ? (
         <div className={classes.header}>
-          <Typography>Shopping car</Typography>
+          <Typography>Empty cart</Typography>
+          <ClearIcon
+            className={classes.icon}
+            onClick={() => setisToggle(false)}
+          />
         </div>
       ) : (
         <div className={classes.header}>
-          <Typography>Shopping car</Typography>
+          <Typography>Shopping cart</Typography>
+
+          <ClearIcon
+            className={classes.icon}
+            onClick={() => setisToggle(false)}
+          />
         </div>
       )}
-
       <hr></hr>
       {cartProducts?.map((item) => (
         <div key={item.item_id} className={classes.card}>
@@ -39,12 +47,14 @@ const Sidebar = ({ isToggle, cartProducts }) => {
               </span>
 
               <ClearIcon
+                className={classes.icon}
                 onClick={() => dispatch(removeCartItem(item.item_id))}
               />
             </div>
             <div className={classes.cardRow}>
               <span className={classes.cardTitle}>
                 <RemoveIcon
+                  className={classes.icon}
                   fontSize="small"
                   onClick={() =>
                     dispatch(
@@ -56,6 +66,7 @@ const Sidebar = ({ isToggle, cartProducts }) => {
               <span className={classes.cardTitle}>{item.quantity}</span>
               <span className={classes.cardTitle}>
                 <AddIcon
+                  className={classes.icon}
                   fontSize="small"
                   onClick={() =>
                     dispatch(
@@ -69,18 +80,30 @@ const Sidebar = ({ isToggle, cartProducts }) => {
           </div>
         </div>
       ))}
-      <Button size="small" variant="contained" color="primary">
-        <Link to="/checkout">checkout</Link>
-      </Button>
-      <Button
-        onClick={() => dispatch(cleanCart())}
-        size="small"
-        variant="contained"
-        color="secondary"
-      >
-        Clear car
-      </Button>
-      {/* <div className={classes.empty}>Empty Shopping car</div>  */}
+      {cartProducts.length === 0 ? (
+        <div></div>
+      ) : (
+        <>
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => setisToggle(false)}
+          >
+            <Link className={classes.link} to="/checkout">
+              checkout
+            </Link>
+          </Button>
+          <Button
+            className={classes.buttonRed}
+            onClick={() => dispatch(cleanCart())}
+            size="small"
+          >
+            Clear car
+          </Button>
+        </>
+      )}
     </div>
   );
 };

@@ -3,25 +3,33 @@ import "./login.css.js";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { useStyles } from "./login.css";
-import { useForm } from '../../hooks/useForm';
-import { useDispatch } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/actions/userActions.js";
+import { useHistory } from "react-router-dom";
+import { getAuth } from "../../redux/selectors/index.js";
 
 const initValues = {
-  email: '',
-  password: '',
-}
+  email: "",
+  password: "",
+};
 
 const Login = () => {
-  const [formData, handleChange] = useForm(initValues)
-  const dispatch = useDispatch()
+  const { loggedIn } = useSelector(getAuth);
+  let history = useHistory();
+  const [formData, handleChange] = useForm(initValues);
+  const dispatch = useDispatch();
   const classes = useStyles();
-
   const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(login(formData))
+    e.preventDefault();
+    dispatch(login(formData));
+    if (history.location.state === undefined) {
+      history.goBack();
+    }
+  };
+  if (loggedIn) {
+    history.push("/checkout");
   }
-
   return (
     <div className={classes.row}>
       <div className={classes.col}>
@@ -50,6 +58,7 @@ const Login = () => {
               </div>
               <div className="form-links">
                 <Button
+                  onClick={onSubmit}
                   variant="contained"
                   color="primary"
                   className={classes.btn}

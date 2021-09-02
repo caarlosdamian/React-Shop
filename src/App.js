@@ -8,9 +8,10 @@ import Provider from "./redux/Provider";
 import Login from "./components/Login";
 import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
-import ModalForm from './components/Modal/ModalForm';
+import ModalForm from "./components/Modal/ModalForm";
 import { useState } from "react";
 import Store from "./components/Store/";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   const [isToggle, setisToggle] = useState(false);
@@ -26,10 +27,10 @@ function App() {
             <Grid item xs={false} sm={2} />
             <Grid item sm={8} xs={12} lg={8}>
               <Switch>
-              <Route path="/store" exact component={Store} />
+                <Route path="/store" exact component={Store} />
                 <Route path="/" exact component={Home} />
-                <Route path="/modal" exact component={ModalForm}/>
-                <Route path="/checkout" exact component={Checkout}/>
+                <Route path="/modal" exact component={ModalForm} />
+                <PrivateRoute path="/checkout" exact component={Checkout} />
                 <Route path="/register" exact component={Register} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/store/:id" exact component={Content} />
