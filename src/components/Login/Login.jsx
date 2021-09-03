@@ -28,7 +28,7 @@ const Login = () => {
     }
   };
   if (loggedIn) {
-    history.push("/checkout");
+    history.push(history.location.state?.from?.pathname)
   }
   return (
     <div className={classes.row}>
