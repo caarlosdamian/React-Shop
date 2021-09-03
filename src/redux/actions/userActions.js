@@ -32,7 +32,6 @@ export const validateSession = token => async dispatch => {
         if (success) {
             dispatch({ type: USER_LOGGIN, email: data.email, jwt: token })
         } else {
-            localStorage.removeItem('token')
             dispatch(logout())
         }
     } catch (error) {
