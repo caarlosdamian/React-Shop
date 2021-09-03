@@ -26,9 +26,7 @@ export default function DenseTable() {
   const products = useSelector(getCartProducts);
   const total = products.map(({ price, quantity }) => price * quantity);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const handleOpen = () => setOpen(true)
 
   return (
     <>
@@ -49,7 +47,7 @@ export default function DenseTable() {
           </TableHead>
           <TableBody>
             {products.map((item) => (
-              <TableRow key={products.name}>
+              <TableRow key={item.item_id}>
                 <TableCell component="th" scope="products">
                   <CardContent>
                     <CardMedia
@@ -65,6 +63,7 @@ export default function DenseTable() {
 
                 <TableCell align="right">
                   <>
+                    { item.quantity > 1 ?
                     <RemoveIcon
                       className={classes.icon}
                       fontSize="small"
@@ -73,7 +72,9 @@ export default function DenseTable() {
                           updateItemQuantity(item.item_id, item.quantity - 1)
                         )
                       }
-                    />
+                    /> :
+                    null
+                  }
                     <span className={classes.span}>{item.quantity}</span>
                     <AddIcon
                       className={classes.icon}

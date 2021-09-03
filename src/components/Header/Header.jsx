@@ -12,18 +12,20 @@ import { getAuth, getCartProducts } from "../../redux/selectors";
 import { getTotalQuantityCart } from "../../utils/totals";
 import useStyles from "./header.css";
 import Sidebar from "../Sidebar/Sidebar";
-import { logout } from "../../redux/actions/userActions";
+import { logout, validateSession } from "../../redux/actions/userActions";
 
 export default function Header({ setisToggle, isToggle }) {
   const cartProducts = useSelector(getCartProducts);
   const { loggedIn } = useSelector(getAuth);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const savedToken = localStorage.getItem('token') ?? null
 
   const menuId = "primary-search-account-menu";
   useEffect(() => {
-    dispatch(fetchCollections());
-  }, [dispatch]);
+    dispatch(fetchCollections())
+    savedToken && dispatch(validateSession(savedToken))
+  }, [dispatch, savedToken])
 
   const totalQuantityCart = getTotalQuantityCart(cartProducts);
 
