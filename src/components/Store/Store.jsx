@@ -20,7 +20,8 @@ const Store = () => {
   const womensTop = top5(products, 5);
 
   return (
-    <div style={{ marginTop: "100px" }}>
+    <>
+    {products.length ? <div style={{ marginTop: "100px" }}>
       <Link
         to={`/store/${hatsTop[0]?.title}`}
         style={{ color: "black", textDecoration: "none" }}
@@ -140,7 +141,8 @@ const Store = () => {
           );
         })}
       </Grid>
-    </div>
+    </div> : <h3>Loading...</h3>}
+    </>
   );
 };
 
