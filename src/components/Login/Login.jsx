@@ -30,7 +30,7 @@ const Login = () => {
     history.push(history.location.state?.from?.pathname);
   }
   return (
-    <div className={classes.row}>
+    <div className={`${classes.row} animate__animated animate__fadeInRight`}>
       <div className={classes.col}>
         <div className="card">
           <div className="card-body">
