@@ -1,10 +1,24 @@
-import ReduxThunk from 'redux-thunk'
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import 'regenerator-runtime/runtime'
+import { configureStore } from "@reduxjs/toolkit";
 
-import rootReducer from './reducers/rootReducer'
+import createSagaMiddleware from "redux-saga";
+import authReducer from "./auth/reducer";
+import collectionReducer from "./collection/reducer";
+import cartReducer from "./cart/reducer";
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)))
+import rootSaga from "./rootsaga";
 
-export default store
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+  devTools: true,
+  reducer: {
+    collectionReducer,
+    authReducer,
+    cartReducer,
+  },
+  middleware: [sagaMiddleware],
+});
+
+sagaMiddleware.run(rootSaga);
+
+export default store;

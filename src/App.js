@@ -4,7 +4,7 @@ import Content from "./components/Content";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
-import Provider from "./redux/Provider";
+import { Provider } from "react-redux";
 import Login from "./components/Login";
 import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
@@ -12,12 +12,13 @@ import ModalForm from "./components/Modal/ModalForm";
 import { useState } from "react";
 import Store from "./components/Store/";
 import PrivateRoute from "./routes/PrivateRoute";
+import store from "./redux/store";
 
 function App() {
   const [isToggle, setisToggle] = useState(false);
 
   return (
-    <Provider>
+    <Provider store={store}>
       <Router>
         <Grid container direction="column">
           <Grid item>

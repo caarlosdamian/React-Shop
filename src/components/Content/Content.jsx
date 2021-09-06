@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 
 import CardItem from "../Card";
 import { createBrowserHistory } from "history";
-import { getCollections } from "../../redux/selectors";
 
 const Content = () => {
-  const { products } = useSelector(getCollections)
+  const products = useSelector((state)=>state.collectionReducer.collection.data);
   const historia = createBrowserHistory();
   const path = historia.location.pathname.slice(7);
   const datafilter = [...products?.filter(({ title }) => title === path)];

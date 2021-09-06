@@ -1,27 +1,31 @@
 import { Button, TextField } from "@material-ui/core";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { register } from "../../redux/actions/userActions";
+import { register } from "../../redux/auth/reducer";
 import { useStyles } from "./register.css";
+import { useHistory } from "react-router-dom";
+import { useDispatch} from "react-redux";
 
 const initValues = {
-  displayName: '',
-  email: '',
-  password: '',
-}
+  displayName: "",
+  email: "",
+  password: "",
+};
 
 const Register = () => {
-  const [formData, handleChange] = useForm(initValues)
-  const dispatch = useDispatch()
+  const [formData, handleChange] = useForm(initValues);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const classes = useStyles();
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(register(formData))
-  }
+    e.preventDefault();
+    dispatch(register(formData));
+    history.push("/");
+  };
+
   return (
     <div className={classes.registerForm}>
       <div className={classes.col}>
@@ -38,16 +42,6 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </div>
-
-              {/* <div className={classes.formGgroup}>
-                <TextField
-                  type="text"
-                  className="form-control"
-                  placeholder="Lastname"
-                  name="lastname"
-                  onChange={handleChange}
-                />
-              </div> */}
 
               <div className={classes.formGgroup}>
                 <TextField
@@ -69,32 +63,22 @@ const Register = () => {
                 />
               </div>
 
-              {/* <div className={classes.formGgroup}>
-                <TextField
-                  type="password"
-                  className="form-control"
-                  placeholder="Confirm Password"
-                  name="confirmation"
-                />
-              </div> */}
               <div id="register">
-                {/* <Link  className={classes.Link}to="/"> */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.btn}
-                  >
-                    Register
-                  </Button>
-                {/* </Link> */}
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                >
+                  Register
+                </Button>
               </div>
             </form>
           </div>
         </div>
-          <span className={classes.span}>Already member?</span>
-        <Link  className={classes.Link}to="/login">
-        <span className={classes.span}>Login</span>
+        <span className={classes.span}>Already member?</span>
+        <Link className={classes.Link} to="/login">
+          <span className={classes.span}>Login</span>
         </Link>
       </div>
     </div>

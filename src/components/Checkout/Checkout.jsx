@@ -8,12 +8,13 @@ import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import { CardContent, CardMedia } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
-import {
-  removeCartItem,
-  updateItemQuantity,
-} from "../../redux/actions/cartActions";
 import { useSelector, useDispatch } from "react-redux";
-import { getCartProducts } from "../../redux/selectors";
+import {
+  get_total,
+  add_item,
+  decrease_item,
+  remove_item,
+} from "../../redux/cart/reducer";
 import ModalForm from "../Modal/ModalForm";
 import useStyles from "./checkout.css";
 import AddIcon from "@material-ui/icons/Add";
@@ -23,13 +24,28 @@ import { useState } from "react";
 export default function DenseTable() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const products = useSelector(getCartProducts);
-  const total = products.map(({ price, quantity }) => price * quantity);
+  const products = useSelector((state) => state.cartReducer.items);
+
+  const total = products.map(({ price, cartQuantity }) => price * cartQuantity);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true)
+  const handleOpen = () => setOpen(true);
+
+  const decreaseItem = (item) => {
+    dispatch(decrease_item(item));
+    dispatch(get_total());
+  };
+  const incrementItem = (item) => {
+    dispatch(add_item(item));
+    dispatch(get_total());
+  };
+  const removeItem = (item) => {
+    dispatch(remove_item(item));
+    dispatch(get_total());
+  };
 
   return (
-    <>
+    <>     
+
       <TableContainer component={Paper} className={classes.root}>
         <Table
           className={classes.table}
@@ -63,39 +79,30 @@ export default function DenseTable() {
 
                 <TableCell align="right">
                   <>
-                    { item.quantity > 1 ?
-                    <RemoveIcon
-                      className={classes.icon}
-                      fontSize="small"
-                      onClick={() =>
-                        dispatch(
-                          updateItemQuantity(item.item_id, item.quantity - 1)
-                        )
-                      }
-                    /> :
-                    null
-                  }
-                    <span className={classes.span}>{item.quantity}</span>
+                    {item.cartQuantity > 1 ? (
+                      <RemoveIcon
+                        className={classes.icon}
+                        fontSize="small"
+                        onClick={() => decreaseItem(item)}
+                      />
+                    ) : null}
+                    <span className={classes.span}>{item.cartQuantity}</span>
                     <AddIcon
                       className={classes.icon}
                       fontSize="small"
-                      onClick={() =>
-                        dispatch(
-                          updateItemQuantity(item.item_id, item.quantity + 1)
-                        )
-                      }
+                      onClick={() => incrementItem(item)}
                     />
                   </>
                 </TableCell>
                 <TableCell align="right">
                   <span className={classes.span}>
-                    $ {item.quantity * item.price}
+                    $ {item.cartQuantity * item.price}
                   </span>
                 </TableCell>
                 <TableCell align="right">
                   <ClearIcon
                     className={classes.icon}
-                    onClick={() => dispatch(removeCartItem(item.item_id))}
+                    onClick={() => removeItem(item)}
                   />
                 </TableCell>
               </TableRow>
@@ -109,6 +116,7 @@ export default function DenseTable() {
       <Button onClick={handleOpen} className={classes.button} size="medium">
         PROCESS PAYMENT
       </Button>
+
       <ModalForm open={open} setOpen={setOpen} />
     </>
   );

@@ -1,14 +1,13 @@
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import HomeCard from "../HomeCard";
-import { getCollections } from "../../redux/selectors/index";
 import useStyles from "./home.css";
 
 const Home = () => {
   const classes = useStyles();
-  const { products } = useSelector(getCollections);
+  const data = useSelector((state)=>state.collectionReducer.collection.data);
   const datafilter = [
-    ...products
+    ...data
       ?.reduce((map, obj) => map.set(obj.col_id, obj), new Map())
       .values(),
   ];

@@ -8,12 +8,16 @@ import { useDispatch } from "react-redux";
 import { Avatar, CardMedia } from "@material-ui/core";
 
 import useStyles from "./card.css";
-import { addItem } from "../../redux/actions/cartActions";
+import { add_item, get_total } from "../../redux/cart/reducer";
 
 const CardItem = ({ item }) => {
   const classes = useStyles();
   const dispatch = useDispatch()
 
+  const addItem = ()=>{
+    dispatch(add_item(item))
+    dispatch(get_total())
+  }
   return (
     <>
       <Card className={classes.root} variant="outlined">
@@ -37,7 +41,7 @@ const CardItem = ({ item }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button onClick={() => dispatch(addItem(item))} size="small" style={{ color: "#F59F9F" }}>
+          <Button onClick={addItem} size="small" style={{ color: "#F59F9F" }}>
             Add to Car
           </Button>
         </CardActions>

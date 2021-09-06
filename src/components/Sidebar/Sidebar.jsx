@@ -1,19 +1,29 @@
 import { Avatar, Button, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import ClearIcon from "@material-ui/icons/Clear";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import useStyles from "./sidebar.css";
 import {
-  removeCartItem,
-  updateItemQuantity,
-  cleanCart,
-} from "../../redux/actions/cartActions";
+  remove_item,
+  add_item,
+  decrease_item,
+  clear_cart,
+  get_total,
+} from "../../redux/cart/reducer";
 import { Link } from "react-router-dom";
 const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  useEffect(() => {
+    dispatch(get_total());
+  }, [dispatch, cartProducts]);
+
+  const clearCart = () => {
+    dispatch(clear_cart());
+    setisToggle(false);
+  };
   return (
     <div className={isToggle ? classes.Sidebar : classes.shrink}>
       {cartProducts.length === 0 ? (
@@ -43,12 +53,12 @@ const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
             <div className={classes.cardRow}>
               <span className={classes.cardTitle}>{item.name}</span>
               <span className={classes.cardTitle}>
-                $ {item.quantity * item.price}
+                $ {item.cartQuantity * item.price}
               </span>
 
               <ClearIcon
                 className={classes.icon}
-                onClick={() => dispatch(removeCartItem(item.item_id))}
+                onClick={() => dispatch(remove_item(item))}
               />
             </div>
             <div className={classes.cardRow}>
@@ -56,23 +66,15 @@ const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
                 <RemoveIcon
                   className={classes.icon}
                   fontSize="small"
-                  onClick={() =>
-                    dispatch(
-                      updateItemQuantity(item.item_id, item.quantity - 1)
-                    )
-                  }
+                  onClick={() => dispatch(decrease_item(item))}
                 />
               </span>
-              <span className={classes.cardTitle}>{item.quantity}</span>
+              <span className={classes.cardTitle}>{item.cartQuantity}</span>
               <span className={classes.cardTitle}>
                 <AddIcon
                   className={classes.icon}
                   fontSize="small"
-                  onClick={() =>
-                    dispatch(
-                      updateItemQuantity(item.item_id, item.quantity + 1)
-                    )
-                  }
+                  onClick={() => dispatch(add_item(item))}
                 />
               </span>
               <span className={classes.cardTitle}></span>
@@ -97,7 +99,7 @@ const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
           </Button>
           <Button
             className={classes.buttonRed}
-            onClick={() => dispatch(cleanCart())}
+            onClick={clearCart}
             size="small"
           >
             Clear car
