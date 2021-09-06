@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 import { register } from "../../redux/auth/reducer";
 import { useStyles } from "./register.css";
 import { useHistory } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const initValues = {
   displayName: "",
@@ -27,7 +27,9 @@ const Register = () => {
   };
 
   return (
-    <div className={classes.registerForm}>
+    <div
+      className={`${classes.registerForm} animate__animated animate__fadeInLeft`}
+    >
       <div className={classes.col}>
         <div className="card">
           <div className="card-body">

@@ -44,9 +44,11 @@ export default function DenseTable() {
   };
 
   return (
-    <>     
-
-      <TableContainer component={Paper} className={classes.root}>
+    <>
+      <TableContainer
+        component={Paper}
+        className={`${classes.root} animate__animated animate__fadeIn`}
+      >
         <Table
           className={classes.table}
           size="small"
