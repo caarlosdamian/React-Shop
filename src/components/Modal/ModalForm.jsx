@@ -4,6 +4,7 @@ import { Button, TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -19,9 +20,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal({ open,setOpen }) {
+export default function TransitionsModal({ open, setOpen }) {
   const classes = useStyles();
+
   const handleClose = () => {
+    setOpen(false);
+  };
+  const handleSuccess = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Sale Completed",
+      showConfirmButton: false,
+      timer: 1000,
+    });
     setOpen(false);
   };
 
@@ -75,7 +86,7 @@ export default function TransitionsModal({ open,setOpen }) {
             <br />
             <br />
             <div align="center">
-              <Button color="primary" onClick={handleClose}>
+              <Button color="primary" onClick={handleSuccess}>
                 Pay
               </Button>
               <Button color="primary" onClick={handleClose}>

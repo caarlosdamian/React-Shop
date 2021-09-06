@@ -7,27 +7,31 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCollections } from "../../redux/actions/getCollections";
-import { getAuth, getCartProducts } from "../../redux/selectors";
-import { getTotalQuantityCart } from "../../utils/totals";
 import useStyles from "./header.css";
 import Sidebar from "../Sidebar/Sidebar";
-import { logout, validateSession } from "../../redux/actions/userActions";
+import { setToken, setUser, signOut } from "../../redux/auth/reducer";
+import { loadCollection } from "../../redux/collection/reducer";
+import { get_total } from "../../redux/cart/reducer";
 
 export default function Header({ setisToggle, isToggle }) {
-  const cartProducts = useSelector(getCartProducts);
-  const { loggedIn } = useSelector(getAuth);
   const dispatch = useDispatch();
-  const classes = useStyles();
-  const savedToken = localStorage.getItem('token') ?? null
 
+  const cartProducts = useSelector((state) => state.cartReducer.items);
+  const token = window.localStorage.getItem("token") ?? null;
+  if (token) {
+    dispatch(setToken(token));
+    dispatch(setUser(true));
+  }
+  const { isAuth } = useSelector((state) => state.authReducer);
+  const totalQuantityCart = useSelector(
+    (state) => state.cartReducer.Cart_Quantity
+  );
+  const classes = useStyles();
   const menuId = "primary-search-account-menu";
   useEffect(() => {
-    dispatch(fetchCollections())
-    savedToken && dispatch(validateSession(savedToken))
-  }, [dispatch, savedToken])
-
-  const totalQuantityCart = getTotalQuantityCart(cartProducts);
+    dispatch(loadCollection());
+    dispatch(get_total());
+  }, [dispatch]);
 
   return (
     <div className={classes.grow}>
@@ -62,9 +66,9 @@ export default function Header({ setisToggle, isToggle }) {
 
             <IconButton color="inherit">
               <Typography className={classes.title} variant="h6" noWrap>
-                {loggedIn ? (
+                {isAuth ? (
                   <span
-                    onClick={() => dispatch(logout())}
+                    onClick={() => dispatch(signOut())}
                     className={classes.Link}
                   >
                     LOGOUT
@@ -79,7 +83,6 @@ export default function Header({ setisToggle, isToggle }) {
             <IconButton
               onClick={() => setisToggle(true)}
               edge="end"
-              aria-label="show 4 new items"
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"

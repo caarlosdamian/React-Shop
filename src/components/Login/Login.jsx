@@ -5,9 +5,8 @@ import { Button, TextField } from "@material-ui/core";
 import { useStyles } from "./login.css";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/actions/userActions.js";
 import { useHistory } from "react-router-dom";
-import { getAuth } from "../../redux/selectors/index.js";
+import { login } from "../../redux/auth/reducer.js";
 
 const initValues = {
   email: "",
@@ -15,7 +14,7 @@ const initValues = {
 };
 
 const Login = () => {
-  const { loggedIn } = useSelector(getAuth);
+  const { isAuth } = useSelector((state) => state.authReducer);
   let history = useHistory();
   const [formData, handleChange] = useForm(initValues);
   const dispatch = useDispatch();
@@ -27,8 +26,8 @@ const Login = () => {
       history.goBack();
     }
   };
-  if (loggedIn) {
-    history.push(history.location.state?.from?.pathname)
+  if (isAuth) {
+    history.push(history.location.state?.from?.pathname);
   }
   return (
     <div className={classes.row}>

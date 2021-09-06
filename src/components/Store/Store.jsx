@@ -2,11 +2,10 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCollections } from "../../redux/selectors";
 import CardItem from "../Card/CardItem";
 
 const Store = () => {
-  const { products } = useSelector(getCollections);
+  const products = useSelector((state)=>state.collectionReducer.collection.data);
   const top5 = (array, num) => {
     const filter = array.filter((item) => item.col_id === num);
     const [item1, item2, item3, item4, item5] = filter;
