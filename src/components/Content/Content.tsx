@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 
 import CardItem from "../Card";
 import { createBrowserHistory } from "history";
+import { CollectionState } from "../../types";
 
 const Content = () => {
   const products = useSelector(
-    (state) => state.collectionReducer.collection.data
+    (state: { collectionReducer: CollectionState }) => state.collectionReducer.collection.data
   );
   const historia = createBrowserHistory();
   const path = historia.location.pathname.slice(7);

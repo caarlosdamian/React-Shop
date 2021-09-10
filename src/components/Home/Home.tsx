@@ -1,12 +1,13 @@
 import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { CollectionState } from "../../types";
 import HomeCard from "../HomeCard";
 import Spinner from "../Spinner/Spinner";
 import useStyles from "./home.css";
 
 const Home = () => {
   const classes = useStyles();
-  const data = useSelector((state) => state.collectionReducer.collection.data);
+  const { data } = useSelector((state: { collectionReducer: CollectionState }) => state.collectionReducer.collection);
   const datafilter = [
     ...data?.reduce((map, obj) => map.set(obj.col_id, obj), new Map()).values(),
   ];

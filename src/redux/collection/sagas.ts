@@ -1,6 +1,6 @@
 import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import { toast } from "react-toastify";
-import { loadCollection, setCollection } from "../collection/reducer";
+import { loadCollection, setCollection } from "./reducer";
 
 import fetchCollection from "../../api/collection";
 

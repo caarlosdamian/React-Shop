@@ -1,6 +1,6 @@
 import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import { toast } from "react-toastify";
-import { login, register, setToken, setUser, signOut } from "../auth/reducer";
+import { login, register, setToken, setUser, signOut } from "./reducer";
 
 import fetchAuth from "../../api/auth";
 

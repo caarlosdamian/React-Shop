@@ -1,12 +1,12 @@
 import React from "react";
-import "./login.css.js";
+import "./login.css.ts";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import { useStyles } from "./login.css";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { login } from "../../redux/auth/reducer.js";
+import { login } from "../../redux/auth/reducer";
 
 const initValues = {
   email: "",

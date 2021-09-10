@@ -10,7 +10,7 @@ import Register from "./components/Register/Register";
 import Checkout from "./components/Checkout/Checkout";
 import ModalForm from "./components/Modal/ModalForm";
 import { useState } from "react";
-import Store from "./components/Store/";
+import Store from "./components/Store";
 import PrivateRoute from "./routes/PrivateRoute";
 import store from "./redux/store";
 

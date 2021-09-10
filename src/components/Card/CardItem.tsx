@@ -9,8 +9,9 @@ import { Avatar, CardMedia } from "@material-ui/core";
 
 import useStyles from "./card.css";
 import { add_item, get_total } from "../../redux/cart/reducer";
+import { CartItemValues } from "../../types";
 
-const CardItem = ({ item }) => {
+const CardItem = ({ item }: { item: CartItemValues }) => {
   const classes = useStyles();
   const dispatch = useDispatch()
 

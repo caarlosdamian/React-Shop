@@ -3,7 +3,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -14,20 +13,18 @@ import { setToken, setUser, signOut } from "../../redux/auth/reducer";
 import { loadCollection } from "../../redux/collection/reducer";
 import { get_total } from "../../redux/cart/reducer";
 import { Badge } from "@material-ui/core";
+import { AuthState, CartState, HeaderComponent } from "../../types";
 
-export default function Header({ setisToggle, isToggle }) {
+export default function Header({ setisToggle, isToggle }: HeaderComponent) {
   const dispatch = useDispatch();
 
-  const cartProducts = useSelector((state) => state.cartReducer.items);
+  const { items: cartProducts, Cart_Quantity: totalQuantityCart } = useSelector((state: { cartReducer: CartState } ) => state.cartReducer);
   const token = window.localStorage.getItem("token") ?? null;
   if (token) {
     dispatch(setToken(token));
     dispatch(setUser(true));
   }
-  const { isAuth } = useSelector((state) => state.authReducer);
-  const totalQuantityCart = useSelector(
-    (state) => state.cartReducer.Cart_Quantity
-  );
+  const { isAuth } = useSelector((state: { authReducer: AuthState }) => state.authReducer);
   const classes = useStyles();
   const menuId = "primary-search-account-menu";
   useEffect(() => {
@@ -44,11 +41,7 @@ export default function Header({ setisToggle, isToggle }) {
         <Toolbar>
           <Link to="/" className={classes.Link}>
             <IconButton
-              edge="start"
-              fontSize="large"
-              className={classes.menuButton}
               color="inherit"
-              aria-label="open drawer"
             >
               <InstagramIcon fontSize="medium" />
             </IconButton>

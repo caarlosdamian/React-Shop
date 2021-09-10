@@ -20,25 +20,26 @@ import useStyles from "./checkout.css";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { useState } from "react";
+import { CartItemValues, CartState } from "../../types";
 
 export default function DenseTable() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.cartReducer.items);
+  const products = useSelector((state: { cartReducer: CartState }) => state.cartReducer.items);
 
   const total = products.map(({ price, cartQuantity }) => price * cartQuantity);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
 
-  const decreaseItem = (item) => {
+  const decreaseItem = (item: CartItemValues) => {
     dispatch(decrease_item(item));
     dispatch(get_total());
   };
-  const incrementItem = (item) => {
+  const incrementItem = (item: CartItemValues) => {
     dispatch(add_item(item));
     dispatch(get_total());
   };
-  const removeItem = (item) => {
+  const removeItem = (item: CartItemValues) => {
     dispatch(remove_item(item));
     dispatch(get_total());
   };
@@ -64,7 +65,7 @@ export default function DenseTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((item) => (
+            {products.map((item: CartItemValues) => (
               <TableRow key={item.item_id}>
                 <TableCell component="th" scope="products">
                   <CardContent>
