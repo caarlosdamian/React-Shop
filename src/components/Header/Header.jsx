@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useStyles from "./header.css";
 import Sidebar from "../Sidebar/Sidebar";
+import InstagramIcon from "@material-ui/icons/Instagram";
 import { setToken, setUser, signOut } from "../../redux/auth/reducer";
 import { loadCollection } from "../../redux/collection/reducer";
 import { get_total } from "../../redux/cart/reducer";
+import { Badge } from "@material-ui/core";
 
 export default function Header({ setisToggle, isToggle }) {
   const dispatch = useDispatch();
@@ -40,15 +42,18 @@ export default function Header({ setisToggle, isToggle }) {
         style={{ backgroundColor: "#F5F3F8", color: "black" }}
       >
         <Toolbar>
-          <IconButton
-            edge="start"
-            fontSize="large"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          <Link to="/" className={classes.Link}>
+            <IconButton
+              edge="start"
+              fontSize="large"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+            >
+              <InstagramIcon fontSize="medium" />
+            </IconButton>
+          </Link>
+
           <Link to="/" className={classes.Link}>
             <Typography className={classes.title} variant="h5" noWrap>
               Fake Store
@@ -87,12 +92,9 @@ export default function Header({ setisToggle, isToggle }) {
               aria-haspopup="true"
               color="inherit"
             >
-              <LocalMallIcon className={classes.icon} />
-              {totalQuantityCart > 0 && (
-                <span className={classes.span}>
-                  {totalQuantityCart > 0 ? totalQuantityCart : ""}
-                </span>
-              )}
+              <Badge badgeContent={totalQuantityCart} color="secondary">
+                <LocalMallIcon />
+              </Badge>
             </IconButton>
           </div>
         </Toolbar>

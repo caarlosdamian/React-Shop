@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   icon: {
-    fontSize: "35px",
+    fontSize: "30px",
+    marginTop:"10px",
   },
   span: {
     fontSize: "12px",
