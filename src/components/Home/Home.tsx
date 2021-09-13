@@ -7,7 +7,10 @@ import useStyles from "./home.css";
 
 const Home = () => {
   const classes = useStyles();
-  const { data } = useSelector((state: { collectionReducer: CollectionState }) => state.collectionReducer.collection);
+  const { data } = useSelector(
+    (state: { collectionReducer: CollectionState }) =>
+      state.collectionReducer.collection
+  );
   const datafilter = [
     ...data?.reduce((map, obj) => map.set(obj.col_id, obj), new Map()).values(),
   ];

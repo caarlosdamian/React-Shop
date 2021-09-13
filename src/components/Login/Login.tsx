@@ -7,21 +7,24 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../redux/auth/reducer";
-
+import { AuthState,FormDat } from "../../types";
 const initValues = {
   email: "",
   password: "",
 };
 
 const Login = () => {
-  const { isAuth } = useSelector((state) => state.authReducer);
+  const { isAuth } = useSelector(
+    (state: { authReducer: AuthState }) => state.authReducer
+  );
+
   let history = useHistory();
   const [formData, handleChange] = useForm(initValues);
   const dispatch = useDispatch();
   const classes = useStyles();
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    dispatch(login(formData));
+    dispatch(login(formData:));
     if (history.location.state === undefined) {
       history.goBack();
     }

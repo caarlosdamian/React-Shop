@@ -17,6 +17,11 @@ export interface CartItemValues {
     cartQuantity: number;
 }
 
+export interface FormDat{
+    email:string;
+    password:string
+}
+
 export interface CartTotalValues {
     total: number;
     quantity: number;
