@@ -6,9 +6,14 @@ import Fade from "@material-ui/core/Fade";
 import Swal from "sweetalert2";
 import useStyles from "./modal.css";
 
-export default function TransitionsModal() {
+interface Props {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function TransitionsModal({ open, setOpen } : Props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
 
@@ -38,7 +43,7 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <div align="center">
+            <div >
               <h2>Payment Form</h2>
             </div>
             <TextField
@@ -71,7 +76,7 @@ export default function TransitionsModal() {
             />
             <br />
             <br />
-            <div align="center">
+            <div>
               <Button color="primary" onClick={handleSuccess}>
                 Pay
               </Button>
