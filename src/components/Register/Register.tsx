@@ -1,5 +1,5 @@
 import { Button, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { register } from "../../redux/auth/reducer";
@@ -14,15 +14,22 @@ const initValues = {
 };
 
 const Register = () => {
-  const [formData, handleChange] = useForm(initValues);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const classes = useStyles();
+  const [credentials, setCredentials] = useState(initValues);
 
-  const onSubmit = (e) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const onSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    dispatch(register(formData));
+    dispatch(register(credentials));
     history.push("/");
   };
 
@@ -34,7 +41,7 @@ const Register = () => {
         <div className="card">
           <div className="card-body">
             <h2 className={classes.registerText}>REGISTER</h2>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={() => onSubmit}>
               <div className={classes.formGgroup}>
                 <TextField
                   type="text"
@@ -71,6 +78,7 @@ const Register = () => {
                   variant="contained"
                   color="primary"
                   className={classes.btn}
+                  onClick={() => onSubmit}
                 >
                   Register
                 </Button>

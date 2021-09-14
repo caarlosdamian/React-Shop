@@ -1,14 +1,14 @@
 import { call, put, spawn, takeLatest } from "redux-saga/effects";
 import { toast } from "react-toastify";
 import { login, register, setToken, setUser, signOut } from "./reducer";
-
+import { PayloadAction } from "@reduxjs/toolkit";
 import fetchAuth from "../../api/auth";
 
-function* displayError(message) {
+function* displayError(message:string) {
   yield call(toast.error, message);
 }
 
-function* onLogin(action) {
+function* onLogin(action: PayloadAction<{ displayName:string,email: string; password: string }>): any {
   const result = yield call(fetchAuth.login, action.payload);
   const { success, data, message } = result;
   if (success) {
@@ -20,7 +20,7 @@ function* onLogin(action) {
     yield call(displayError, message);
   }
 }
-function* onRegister(action) {
+function* onRegister(action: PayloadAction<{ email: string; password: string }>): any {
   const result = yield call(fetchAuth.register, action.payload);
   const { success, data, message } = result;
   if (success) {
@@ -34,7 +34,6 @@ function* onRegister(action) {
 
 function* onSignOut() {
   yield window.localStorage.removeItem("token");
-  yield call(Window.nav.push, "/");
 }
 
 function* listenActions() {
