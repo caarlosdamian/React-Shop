@@ -4,11 +4,11 @@ import { loadCollection, setCollection } from "./reducer";
 
 import fetchCollection from "../../api/collection";
 
-function* displayError(message) {
+function* displayError(message:string) {
   yield call(toast.error, message);
 }
 
-function* onLoadCollection() {
+function* onLoadCollection(): any {
   const result = yield call(fetchCollection.getAll);
   const { success, data, message } = result;
   if (success) {
