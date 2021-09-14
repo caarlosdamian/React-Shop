@@ -1,7 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
 import { register } from "../../redux/auth/reducer";
 import { useStyles } from "./register.css";
 import { useHistory } from "react-router-dom";

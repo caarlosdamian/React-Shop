@@ -1,16 +1,17 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { CartItemValues, CollectionState } from "../../types";
 
 import CardItem from "../Card/CardItem";
 import Spinner from "../Spinner";
 
 const Store = () => {
   const products = useSelector(
-    (state) => state.collectionReducer.collection.data
+    (state: { collectionReducer: CollectionState }) =>
+      state.collectionReducer.collection.data
   );
-  const top5 = (array, num) => {
+  const top5 = (array: CartItemValues[], num: number) => {
     const filter = array.filter((item) => item.col_id === num);
     const [item1, item2, item3, item4, item5] = filter;
     let newarray = [item1, item2, item3, item4, item5];

@@ -49,7 +49,7 @@ export const useStyles = makeStyles(() => ({
       transition: "all ease-in 0.5s",
     },
     empty: {
-      position: block,
+      position: "block",
       top: "50%",
       left: "50%",
       transform: "translate(-50, -50%)",

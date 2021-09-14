@@ -95,8 +95,6 @@ export default function Header({ setisToggle, isToggle }: HeaderComponent) {
 
       <Sidebar
         cartProducts={cartProducts}
-        setisToggle={setisToggle}
-        isToggle={isToggle}
       />
     </div>
   );
