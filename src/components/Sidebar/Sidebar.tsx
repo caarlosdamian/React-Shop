@@ -1,5 +1,5 @@
 import { Avatar, Button, Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import ClearIcon from "@material-ui/icons/Clear";
 import AddIcon from "@material-ui/icons/Add";
@@ -13,9 +13,13 @@ import {
   get_total,
 } from "../../redux/cart/reducer";
 import { Link } from "react-router-dom";
-const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
+import { CartItemValues } from '../../types';
+
+
+export const Sidebar = ({ cartProducts } : { cartProducts: CartItemValues[] }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [ isToggle, setisToggle ] = useState(false)
   useEffect(() => {
     dispatch(get_total());
   }, [dispatch, cartProducts]);
@@ -24,6 +28,7 @@ const Sidebar = ({ setisToggle, isToggle, cartProducts }) => {
     dispatch(clear_cart());
     setisToggle(false);
   };
+
   return (
     <div className={isToggle ? classes.Sidebar : classes.shrink}>
       {cartProducts.length === 0 ? (

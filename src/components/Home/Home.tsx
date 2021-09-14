@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+ import { Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { CollectionState } from "../../types";
 import HomeCard from "../HomeCard";
