@@ -11,7 +11,7 @@ import useStyles from "./card.css";
 import { add_item, get_total } from "../../redux/cart/reducer";
 import { CartItemValues } from "../../types";
 
-const CardItem = ({ item }: { item: CartItemValues[] }) => {
+const CardItem = ({ item }: { item: CartItemValues }) => {
   const classes = useStyles();
   const dispatch = useDispatch()
 

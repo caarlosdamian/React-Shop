@@ -46,3 +46,15 @@ export interface HeaderComponent {
     setisToggle: (newStates: boolean) => void;
     isToggle: boolean;
 }
+
+export interface HistoryValues {
+    location: {
+        state: {
+            from: {
+                pathname: string;
+            }
+        }
+    };
+    goBack: () => void;
+    push: ([newpath]: string) => void;
+}
