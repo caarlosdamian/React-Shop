@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -13,7 +12,6 @@ interface Props {
 
 export default function TransitionsModal({ open, setOpen } : Props) {
   const classes = useStyles();
-  // const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
 

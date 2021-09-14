@@ -17,6 +17,7 @@ import { CartItemValues } from '../../types';
 
 
 export const Sidebar = ({ cartProducts } : { cartProducts: CartItemValues[] }) => {
+  console.log(cartProducts)
   const dispatch = useDispatch();
   const classes = useStyles();
   const [ isToggle, setisToggle ] = useState(false)
@@ -31,7 +32,7 @@ export const Sidebar = ({ cartProducts } : { cartProducts: CartItemValues[] }) =
 
   return (
     <div className={isToggle ? classes.Sidebar : classes.shrink}>
-      {cartProducts.length === 0 ? (
+      {cartProducts?.length === 0 ? (
         <div className={classes.header}>
           <Typography>Empty cart</Typography>
           <ClearIcon
@@ -51,7 +52,7 @@ export const Sidebar = ({ cartProducts } : { cartProducts: CartItemValues[] }) =
       )}
       <hr></hr>
       {cartProducts?.map((item) => (
-        <div key={item.item_id} className={classes.card}>
+        <div key={item?.item_id} className={classes.card}>
           <Avatar alt="Remy Sharp" src={item.imageUrl} />
 
           <div className={classes.cardBody}>

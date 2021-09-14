@@ -18,13 +18,17 @@ import { AuthState, CartState, HeaderComponent } from "../../types";
 export default function Header({ setisToggle, isToggle }: HeaderComponent) {
   const dispatch = useDispatch();
 
-  const { items: cartProducts, Cart_Quantity: totalQuantityCart } = useSelector((state: { cartReducer: CartState } ) => state.cartReducer);
+  const { items: cartProducts, Cart_Quantity: totalQuantityCart } = useSelector(
+    (state: { cartReducer: CartState }) => state.cartReducer
+  );
   const token = window.localStorage.getItem("token") ?? null;
   if (token) {
     dispatch(setToken(token));
     dispatch(setUser(true));
   }
-  const { isAuth } = useSelector((state: { authReducer: AuthState }) => state.authReducer);
+  const { isAuth } = useSelector(
+    (state: { authReducer: AuthState }) => state.authReducer
+  );
   const classes = useStyles();
   const menuId = "primary-search-account-menu";
   useEffect(() => {
@@ -40,9 +44,7 @@ export default function Header({ setisToggle, isToggle }: HeaderComponent) {
       >
         <Toolbar>
           <Link to="/" className={classes.Link}>
-            <IconButton
-              color="inherit"
-            >
+            <IconButton color="inherit">
               <InstagramIcon fontSize="medium" />
             </IconButton>
           </Link>
@@ -93,9 +95,7 @@ export default function Header({ setisToggle, isToggle }: HeaderComponent) {
         </Toolbar>
       </AppBar>
 
-      <Sidebar
-        cartProducts={cartProducts}
-      />
+      <Sidebar cartProducts={cartProducts} />
     </div>
   );
 }
