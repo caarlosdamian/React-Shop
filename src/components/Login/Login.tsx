@@ -29,7 +29,7 @@ const Login = () => {
     });
   };
 
-  const onSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(login(credentials));
     if (history.location.state === undefined) {
@@ -45,7 +45,7 @@ const Login = () => {
         <div className="card">
           <div className="card-body">
             <h2 className={classes.loginText}>Login</h2>
-            <form onSubmit={() => onSubmit}>
+            <form onSubmit={onSubmit}>
               <div className={classes.formGgroup}>
                 <TextField
                   label="Email"
@@ -67,7 +67,7 @@ const Login = () => {
               </div>
               <div className="form-links">
                 <Button
-                  onClick={() => onSubmit}
+                  onClick={onSubmit}
                   variant="contained"
                   color="primary"
                   className={classes.btn}

@@ -26,7 +26,8 @@ const Register = () => {
     });
   };
 
-  const onSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSubmit = (e: React.FormEvent) => {
+    console.log("hola");
     e.preventDefault();
     dispatch(register(credentials));
     history.push("/");
@@ -40,7 +41,7 @@ const Register = () => {
         <div className="card">
           <div className="card-body">
             <h2 className={classes.registerText}>REGISTER</h2>
-            <form onSubmit={() => onSubmit}>
+            <form onSubmit={onSubmit}>
               <div className={classes.formGgroup}>
                 <TextField
                   type="text"
@@ -71,13 +72,14 @@ const Register = () => {
                 />
               </div>
 
+
               <div id="register">
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
                   className={classes.btn}
-                  onClick={() => onSubmit}
+                  onClick={onSubmit}
                 >
                   Register
                 </Button>
