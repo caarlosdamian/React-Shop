@@ -13,14 +13,20 @@ import {
   get_total,
 } from "../../redux/cart/reducer";
 import { Link } from "react-router-dom";
-import { CartItemValues } from '../../types';
+import { CartItemValues, HeaderComponent } from "../../types";
+type Props = {
+  cartProducts: CartItemValues[];
+  setisToggle: (newStates: boolean) => void;
+  isToggle: boolean;
+};
 
-
-export const Sidebar = ({ cartProducts } : { cartProducts: CartItemValues[] }) => {
-  console.log(cartProducts)
+export const Sidebar: React.FC<Props> = ({
+  setisToggle,
+  isToggle,
+  cartProducts,
+}) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [ isToggle, setisToggle ] = useState(false)
   useEffect(() => {
     dispatch(get_total());
   }, [dispatch, cartProducts]);

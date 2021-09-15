@@ -17,7 +17,7 @@ import { AuthState, CartState, HeaderComponent } from "../../types";
 
 export default function Header({ setisToggle, isToggle }: HeaderComponent) {
   const dispatch = useDispatch();
-
+  console.log(isToggle);
   const { items: cartProducts, Cart_Quantity: totalQuantityCart } = useSelector(
     (state: { cartReducer: CartState }) => state.cartReducer
   );
@@ -95,7 +95,11 @@ export default function Header({ setisToggle, isToggle }: HeaderComponent) {
         </Toolbar>
       </AppBar>
 
-      <Sidebar cartProducts={cartProducts} />
+      <Sidebar
+        setisToggle={setisToggle}
+        isToggle={isToggle}
+        cartProducts={cartProducts}
+      />
     </div>
   );
 }
