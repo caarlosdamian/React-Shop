@@ -4,6 +4,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Swal from "sweetalert2";
 import useStyles from "./modal.css";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clear_cart } from "../../redux/cart/reducer";
 
 interface Props {
   open: boolean;
@@ -12,6 +15,8 @@ interface Props {
 
 export default function TransitionsModal({ open, setOpen } : Props) {
   const classes = useStyles();
+  let history = useHistory();
+  const dispatch = useDispatch();
 
   const handleClose = () => setOpen(false);
 
@@ -22,7 +27,9 @@ export default function TransitionsModal({ open, setOpen } : Props) {
       showConfirmButton: false,
       timer: 1000,
     });
-    setOpen(false); 
+    setOpen(false);
+    dispatch(clear_cart());
+    history.push('/');
   };
 
   return (
