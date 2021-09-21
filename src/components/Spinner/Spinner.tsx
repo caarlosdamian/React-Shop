@@ -1,10 +1,5 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-interface SpinnerComponent {
-  size: number;
-  thickness: number;
-}
-
 const Spinner = ({ size = 50, thickness = 5 }) => {
   return (
     <div

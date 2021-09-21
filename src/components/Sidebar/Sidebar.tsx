@@ -1,5 +1,5 @@
 import { Avatar, Button, Typography } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import ClearIcon from "@material-ui/icons/Clear";
 import AddIcon from "@material-ui/icons/Add";
@@ -13,7 +13,7 @@ import {
   get_total,
 } from "../../redux/cart/reducer";
 import { Link } from "react-router-dom";
-import { CartItemValues, HeaderComponent } from "../../types";
+import { CartItemValues } from "../../types";
 type Props = {
   cartProducts: CartItemValues[];
   setisToggle: (newStates: boolean) => void;
